@@ -11,3 +11,14 @@ char *substr(const char *str, size_t n){
     return sub_str;
 }
 
+
+void free_strv(char *strv[]){
+    int i = 0;
+    char* str = strv[i];
+
+    while (str){
+        free(str);
+        i++;
+    }
+    free(strv);
+}
