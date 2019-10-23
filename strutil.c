@@ -59,25 +59,25 @@ char *join(char **strv, char sep){
 
     if (tam == 0) tam = 1;
 
-    char* str_final = malloc(sizeof(char)*tam);
+    char* jstr = malloc(sizeof(char)*tam);
 
-    int i = 0;
-    int k = 0;
+    int pos_arreglo = 0;
+    int pos_jstr = 0;
 
-    while(strv[i]){
-        int j = 0;
-        while(strv[i][j] != '\0'){
-            str_final[k] = strv[i][j];
-            j++;
-            k++;
+    while(strv[pos_arreglo]){
+        int pos_str = 0;
+        while(strv[pos_arreglo][pos_str] != '\0'){
+            str_final[pos_jstr] = strv[pos_arreglo][pos_str];
+            pos_str++;
+            pos_jstr++;
         }
-        str_final[k] = sep;
-        i++;
-        k++;
+        jstr[pos_jstr] = sep;
+        pos_arreglo++;
+        pos_jstr++;
     }
-    str_final[tam-1] = '\0';
+    jstr[tam-1] = '\0';
 
-    return str_final;
+    return jstr;
 }
  
 void free_strv(char *strv[]){
