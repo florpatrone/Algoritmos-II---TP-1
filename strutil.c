@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 char *substr(const char *str, size_t n){
     char* sub_str = malloc(sizeof(char)*n+1);
@@ -13,39 +14,36 @@ char *substr(const char *str, size_t n){
 
 char **split(const char *str, char sep){
     int i = 0;
-    int cont_s = 0;
-    int cont_c = 0;
+    int cont_str = 0;
+    int cont_char = 0;
 
     char* vector_est[strlen(str)+1];
 
-    while (1){
-
+    while (true){
         if ((str[i] != sep) && (str[i] != '\0')){
-            cont_c++;
+            cont_char++;
             
         }else{
-            cont_s++;
-            char* n_str = malloc(sizeof(char)*cont_c+1);
-            strncpy(n_str,str+(i-cont_c),cont_c);
-            n_str[cont_c] = '\0';
-            vector_est[cont_s-1] = n_str;
+            cont_str++;
+            char* n_str = malloc(sizeof(char)*cont_char+1);
+            strncpy(n_str,str+(i-cont_char),cont_char);
+            n_str[cont_char] = '\0';
+            vector_est[cont_str-1] = n_str;
 
             if (str[i] == '\0') break;
-            cont_c = 0;
+            cont_char = 0;
         }        
         i++;
     }
 
-    char** vector_din = malloc(sizeof(char*)*cont_s+1);
+    char** vector_din = malloc(sizeof(char*)*cont_str+1);
 
-    for (int j = 0; j < cont_s; j++){
+    for (int j = 0; j < cont_str; j++){
         vector_din[j] = vector_est[j];
     }
 
-    vector_din[cont_s] = NULL;
-
+    vector_din[cont_str] = NULL;
     return vector_din;
-
 }
 
 char *join(char **strv, char sep){
