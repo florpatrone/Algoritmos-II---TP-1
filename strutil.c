@@ -36,7 +36,7 @@ char **split(const char *str, char sep){
         i++;
     }
 
-    char** vector_din = malloc(sizeof(char*)*cont_str+1);
+    char** vector_din = malloc(sizeof(char*)*(cont_str+1));
 
     for (int j = 0; j < cont_str; j++){
         vector_din[j] = vector_est[j];
