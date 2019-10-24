@@ -48,14 +48,15 @@ char **split(const char *str, char sep){
 
 char *join(char **strv, char sep){
     int x = 0;
-    int tam = 0;
+    size_t tam = 0;
     
     while (strv[x]){
-        tam += strlen(strv[x])+1;
+        tam += strlen(strv[x]);
+        if (sep != '\0') tam++;
         x++;
     }
 
-    if (tam == 0) tam = 1;
+    if ( (sep == '\0') || (tam == 0) ) tam++;
 
     char* jstr = malloc(sizeof(char)*tam);
 
@@ -65,13 +66,15 @@ char *join(char **strv, char sep){
     while(strv[pos_arreglo]){
         int pos_str = 0;
         while(strv[pos_arreglo][pos_str] != '\0'){
-            str_final[pos_jstr] = strv[pos_arreglo][pos_str];
+            jstr[pos_jstr] = strv[pos_arreglo][pos_str];
             pos_str++;
             pos_jstr++;
         }
-        jstr[pos_jstr] = sep;
+        if (sep != '\0'){
+            jstr[pos_jstr] = sep;
+            pos_jstr++;
+        }
         pos_arreglo++;
-        pos_jstr++;
     }
     jstr[tam-1] = '\0';
 
