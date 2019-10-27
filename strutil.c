@@ -3,7 +3,7 @@
 #include <stdbool.h>
 
 char *substr(const char *str, size_t n){
-    char* sub_str = malloc(sizeof(char)*n+1);
+    char* sub_str = malloc(sizeof(char)*(n+1));
  
     if (sub_str == NULL) return NULL;
  
@@ -25,7 +25,7 @@ char **split(const char *str, char sep){
             
         }else{
             cont_str++;
-            char* n_str = malloc(sizeof(char)*cont_char+1);
+            char* n_str = malloc(sizeof(char)*(cont_char+1));
             strncpy(n_str,str+(i-cont_char),cont_char);
             n_str[cont_char] = '\0';
             vector_est[cont_str-1] = n_str;
