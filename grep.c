@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include <ctype.h>
 #include "lista.h"
 
@@ -19,7 +20,6 @@ bool es_numero(const char* str){
 }
 
 int main(int argc, char const *argv[]){
-
     if (! ((argc == 3) || (argc == 4)) ){
         return fprintf(stderr,"%s","Cantidad de parametros erronea.\n");
     }
@@ -47,33 +47,40 @@ int main(int argc, char const *argv[]){
 
     if (contexto > 0){
         lista = lista_crear();
-        if (!lista) return -1; //ERROR
+        if (!lista){
+        	fclose(archivo);
+            return fprintf(stderr,"%s","Error de memoria.\n");
+        }
     }
-
+    
     char* linea = NULL;
 	size_t n = 0;
 
     while ((getline(&linea, &n, archivo)) > 0){
         if (contiene_substr(linea,substr)){
             for (int i = 0; i < contexto; i++){
+                if (lista_esta_vacia(lista)) break;
                 char* anterior = lista_borrar_primero(lista);
                 fprintf(stdout,"%s",anterior);
+                free(anterior);
             }
             fprintf(stdout,"%s",linea);
-        }
-
-        else if (contexto > 0){
+        
+        }else if (contexto > 0){
             if (lista_largo(lista) == contexto){
                 lista_borrar_primero(lista);
             }
-            lista_insertar_ultimo(lista,linea); //revisar
+            if (!lista_insertar_ultimo(lista,strdup(linea))){
+                free(linea);
+                lista_destruir(lista,free);
+                fclose(archivo);   
+                return fprintf(stderr,"%s","Error de memoria.\n");
+            }
         }
     }
-
 	free(linea);
-	fclose(archivo);
-    
+    if (lista) lista_destruir(lista,free);
+	fclose(archivo);    
     return 0;
+    
 }
-
-
