@@ -1,15 +1,21 @@
 #define _POSIX_C_SOURCE 200809L
 #include <stdio.h>
 #include <stdlib.h>
-#include "lista.h"
 #include <stdbool.h>
+#include <ctype.h>
+#include "lista.h"
 
 bool contiene_substr(const char* str, const char* substr){
     return true;
 }
 
 bool es_numero(const char* str){
-    return true;
+    int i = 0;
+    while (str[i] != '\0'){
+        if (!isdigit(str[i])) return false;
+        i++;
+    }
+    return i != 0;
 }
 
 int main(int argc, char const *argv[]){
@@ -19,12 +25,12 @@ int main(int argc, char const *argv[]){
     }
 
     const char* substr = argv[1];
-    const char* contexto = argv[2];
-    //int contexto = atoi(argv[2]);
 
-    if (!es_numero(contexto)){
+    if (!es_numero(argv[2])){
         return fprintf(stderr,"%s","Tipo de parametro incorrecto.\n");
     }
+    
+    int contexto = atoi(argv[2]);
 
     FILE* archivo = NULL;
 
