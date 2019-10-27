@@ -6,7 +6,24 @@
 #include "lista.h"
 
 bool contiene_substr(const char* str, const char* substr){
-    return true;
+    int i = 0;
+    int j = 0;
+    size_t len = strlen(substr);
+
+    while (str[i] != '\0'){
+        if (str[i] == substr[j]){
+            j++;
+            for (; j < len; j++){
+                if (str[i+j] != substr[j]){
+                    j = 0;
+                    break;
+                }
+            }
+            if (j != 0) return true;
+        }
+        i++;
+    }
+    return false;
 }
 
 bool es_numero(const char* str){
