@@ -9,6 +9,22 @@
 
 typedef int(*f_operacion)(int,int);
 
+int suma_resta(int a,int b){
+    return a+b;
+}
+
+int producto(int a,int b){
+    return a*b;
+}
+
+int division(int a,int b){
+    return a/b;
+}
+
+int _operador_ternario(int a,int b, int c){
+    return a ? b : c;
+}
+
 int* raiz_cuadrada(pila_t* pila){
     if (pila_esta_vacia(pila)){
         return NULL;
