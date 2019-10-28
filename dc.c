@@ -9,6 +9,58 @@
 
 typedef int(*f_operacion)(int,int);
 
+int* raiz_cuadrada(pila_t* pila){
+    if (pila_esta_vacia(pila)){
+        return NULL;
+    }
+    int a = *(int*)pila_desapilar(pila);
+    if (a < 0){
+        return NULL;
+    }
+    int* resultado = malloc(sizeof(int));    
+    *resultado = _raiz_cuadrada(a);
+    return resultado;
+}
+
+int* operador_ternario(pila_t* pila){
+    int abc[3];
+
+    for (int j = 0; j < 3; j++){
+        if (pila_esta_vacia(pila)){
+            return NULL;
+        }
+        abc[j] = *(int*)pila_desapilar(pila);
+    }
+
+    int* resultado = malloc(sizeof(int));
+    *resultado = _operador_ternario(abc[2],abc[1],abc[0]);
+    return resultado;
+    
+}
+
+int* otras_operaciones(pila_t* pila, f_operacion operacion, bool logaritmo, bool potencia, bool division){
+    int ab[2];
+
+    for (int j = 0; j < 2; j++){
+        if (pila_esta_vacia(pila)){
+            return NULL;
+        }
+        ab[j] = *(int*)pila_desapilar(pila); 
+    }
+
+    if (logaritmo){
+        if (ab[1] <= 0) return NULL;
+    }else if (potencia){
+        if (ab[1] < 0) return NULL;
+    }else if (division){
+        if (ab[1] == 0) return NULL;
+    }
+
+    int* resultado = malloc(sizeof(int));
+    *resultado = operacion(ab[0],ab[1]);
+    return resultado;
+}
+
 f_operacion obtener_operacion(const char* operacion){
    if( (strcmp(operacion,"+") == 0) ||  (strcmp(operacion,"-") == 0)){
       return &suma_resta;
