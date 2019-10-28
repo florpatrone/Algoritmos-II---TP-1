@@ -9,6 +9,25 @@
 
 typedef int(*f_operacion)(int,int);
 
+f_operacion obtener_operacion(const char* operacion){
+   if( (strcmp(operacion,"+") == 0) ||  (strcmp(operacion,"-") == 0)){
+      return &suma_resta;
+   }
+   if (strcmp(operacion,"*") == 0){
+      return &producto;
+   }
+   if (strcmp(operacion,"/") == 0){
+      return &division;
+   }
+   if (strcmp(operacion,"log") == 0){
+      return &logaritmo;
+   }
+   if (strcmp(operacion,"^") == 0){
+      return &potencia;
+   }
+   return NULL;
+}
+
 void calcular(char** entrada){
     pila_t* pila = pila_crear();
     int* resultado = NULL;
