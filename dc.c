@@ -9,6 +9,15 @@
 
 typedef int(*f_operacion)(int,int);
 
+bool es_numero(const char* str){
+    int i = 0;
+    while (str[i] != '\0'){
+        if (!isdigit(str[i])) return false;
+        i++;
+    }
+    return i != 0;
+}
+
 int suma_resta(int a,int b){
     return a+b;
 }
