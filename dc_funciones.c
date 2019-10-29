@@ -1,5 +1,9 @@
 #include "dc.h"
+#include "strutil.h"
 #include <ctype.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 bool es_numero(const char* str){
     int i = 0;

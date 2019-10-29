@@ -1,4 +1,8 @@
+#define _POSIX_C_SOURCE 200809L
 #include "dc.h"
+#include "strutil.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 int main(int argc, const char* argv[]){
     FILE* archivo = NULL;
