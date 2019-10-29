@@ -24,6 +24,13 @@ bool es_numero(const char* str){
     return i != 0;
 }
 
+void destruir_pila(pila_t* pila){
+    while (!pila_esta_vacia(pila)){
+        free(pila_desapilar(pila));
+    }
+    pila_destruir(pila);
+}
+
 int suma(int a,int b){
     return a+b;
 }
@@ -212,6 +219,7 @@ void calcular(char** entrada){
     }
     free(resultado);
 }
+
 
 void remover_salto_linea(char** vector){
     int i = 0;
