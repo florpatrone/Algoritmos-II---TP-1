@@ -13,8 +13,13 @@ typedef int(*f_operacion)(int,int);
 bool es_numero(const char* str){
     int i = 0;
     while (str[i] != '\0'){
-        if (!isdigit(str[i])) return false;
+        if (!isdigit(str[i])){
+            if (!((str[i] == '-')&&(i == 0))) return false;
+        }
         i++;
+    }
+    if ((i == 1)&&(str[0] == '-')){
+        return false;
     }
     return i != 0;
 }
