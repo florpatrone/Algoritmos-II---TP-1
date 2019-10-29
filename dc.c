@@ -25,7 +25,7 @@ int main(int argc, const char* argv[]){
         char** entrada = split(linea,' ');
         if (!entrada){
             fclose(archivo);
-            return fprintf(archivo,"%s","Error de memoria\n");
+            return fprintf(archivo,"%s","ERROR\n");
         }
         remover_salto_linea(entrada);
         calcular(entrada);

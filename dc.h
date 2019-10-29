@@ -18,6 +18,11 @@ void destruir_pila(pila_t* pila);
 //Post: la ultima cadena del vector es identica pero sin el salto de linea.
 void remover_salto_linea(char** vector);
 
+//Recibe una cadena y devuelve un puntero a un entero equivalente a la cadena,
+//en memoria dinamica.
+//Pre: la cadena debe ser equivalente a un numero entero.
+int* numero_convertido(char* str);
+
 //Dado una cadena, devuelve la operacion asociada a esa cadena,
 //NULL si no corresponde a ninguna operacion.
 f_operacion obtener_operacion(const char* operacion);
