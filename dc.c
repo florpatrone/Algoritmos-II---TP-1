@@ -24,8 +24,12 @@ bool es_numero(const char* str){
     return i != 0;
 }
 
-int suma_resta(int a,int b){
+int suma(int a,int b){
     return a+b;
+}
+
+int resta(int a,int b){
+    return a-b;
 }
 
 int producto(int a,int b){
@@ -130,8 +134,11 @@ int* otras_operaciones(pila_t* pila, f_operacion operacion, bool logaritmo, bool
 }
 
 f_operacion obtener_operacion(const char* operacion){
-   if( (strcmp(operacion,"+") == 0) ||  (strcmp(operacion,"-") == 0)){
-      return &suma_resta;
+   if (strcmp(operacion,"+") == 0){
+      return &suma;
+   }
+   if (strcmp(operacion,"-") == 0){
+      return &resta;
    }
    if (strcmp(operacion,"*") == 0){
       return &producto;
