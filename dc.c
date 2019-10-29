@@ -213,6 +213,26 @@ void calcular(char** entrada){
     free(resultado);
 }
 
+void remover_salto_linea(char** vector){
+    int i = 0;
+    
+    while (vector[i] != NULL) i++;
+    if (i == 0) return;
+    
+    char* str = vector[i-1];
+    int j = 0;
+    
+    while(str[j] != '\n'){
+        if (str[j] == '\0') return;
+        j++;
+    }
+
+    char* nuevo_str = substr(str,j);
+    vector[i-1] = nuevo_str;
+    free(str);
+}
+
+
 int main(int argc, const char* argv[]){
     FILE* archivo = NULL;
 
@@ -236,6 +256,7 @@ int main(int argc, const char* argv[]){
             fclose(archivo);
             return fprintf(archivo,"%s","Error de memoria\n");
         }
+        remover_salto_linea(entrada);
         calcular(entrada);
         free_strv(entrada);
     }
