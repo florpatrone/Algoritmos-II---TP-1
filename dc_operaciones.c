@@ -47,8 +47,10 @@ int* raiz_cuadrada(pila_t* pila){
         free(a);
         return NULL;
     }
-    int* resultado = malloc(sizeof(int));   
+    int* resultado = malloc(sizeof(int)); 
+    if (!resultado) return NULL;  
     *resultado = _raiz_cuadrada(*a,0,*a-1);
+    free(a);
     return resultado;
 }
 
@@ -63,8 +65,8 @@ int logaritmo(int a,int b){
     return _logaritmo(a,b,1,1);
 }
 
-int _operador_ternario(int a,int b, int c){
-    return a ? b : c;
+int _operador_ternario(int a, int b, int c){
+    return c != 0 ? b : a;
 }
 
 int* operador_ternario(pila_t* pila){
@@ -80,6 +82,7 @@ int* operador_ternario(pila_t* pila){
     }
 
     int* resultado = malloc(sizeof(int));
+    if (!resultado) return NULL;
     *resultado = _operador_ternario(abc[2],abc[1],abc[0]);
     return resultado;
 
@@ -106,6 +109,7 @@ int* otras_operaciones(pila_t* pila, f_operacion operacion, bool logaritmo, bool
     }
 
     int* resultado = malloc(sizeof(int));
+    if (!resultado) return NULL;
     *resultado = operacion(ab[0],ab[1]);
     return resultado;
 }

@@ -78,6 +78,10 @@ f_operacion obtener_operacion(const char* operacion){
 
 void calcular(char** entrada){
     pila_t* pila = pila_crear();
+    if (!pila){
+        fprintf(stdout,"%s","ERROR\n");
+        return;
+    }
     int* resultado = NULL;
     int i = 0;
     bool errores = false;
@@ -85,10 +89,23 @@ void calcular(char** entrada){
     while ( (entrada[i] != NULL) && (!errores) ){
         char* simbolo = entrada[i];
 
+        if (simbolo[0] == '\0'){
+            i++;
+            continue;
+        }
+
         if (es_numero(simbolo)){
             int* n = malloc(sizeof(int));
+            if (!n){
+                errores = true;
+                break;
+            }
             *n = atoi(simbolo);
-            pila_apilar(pila,n);
+            if (!pila_apilar(pila,n)){
+                errores = true;
+                free(n);
+                break;
+            }
             i++;
             continue;
         }
@@ -111,7 +128,9 @@ void calcular(char** entrada){
         if (!resultado){
             errores = true;
         }else{
-            pila_apilar(pila,resultado);
+            if (!pila_apilar(pila,resultado)){
+                errores = true;
+            };
         }
         i++;
     }
@@ -124,7 +143,7 @@ void calcular(char** entrada){
             errores = true;
         }
     }
-    pila_destruir(pila);
+    destruir_pila(pila);
     if (errores){
         fprintf(stdout,"%s","ERROR\n");
     }else{

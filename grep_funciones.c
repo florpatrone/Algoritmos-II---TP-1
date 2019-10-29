@@ -46,10 +46,12 @@ bool imprimir_linea(lista_t* lista, const char* linea, const char* substr, int c
         fprintf(stdout,"%s",linea);
     }else if (contexto > 0){
         if (lista_largo(lista) == contexto){
-                lista_borrar_primero(lista);
+                free(lista_borrar_primero(lista));
         }
-        if (!lista_insertar_ultimo(lista,strdup(linea))){
+        char* dup_linea = strdup(linea);
+        if (!lista_insertar_ultimo(lista,dup_linea)){
             fprintf(stderr,"%s","Error de memoria.\n");
+            free(dup_linea);
             return false;
         }
     }

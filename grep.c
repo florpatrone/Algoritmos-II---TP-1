@@ -5,13 +5,13 @@
 
 int main(int argc, char const *argv[]){
     if (! ((argc == 3) || (argc == 4)) ){
-        return fprintf(stderr,"%s","Cantidad de parametros erronea.\n");
+        return fprintf(stderr,"%s","Cantidad de parametros erronea\n");
     }
     
     const char* substr = argv[1];
     
     if (!es_numero(argv[2])){
-        return fprintf(stderr,"%s","Tipo de parametro incorrecto.\n");
+        return fprintf(stderr,"%s","Tipo de parametro incorrecto\n");
     }
     
     int contexto = atoi(argv[2]);
@@ -22,7 +22,7 @@ int main(int argc, char const *argv[]){
     }else{
         archivo = fopen(argv[3],"r");
         if (!archivo){
-            return fprintf(stderr,"%s","No se pudo leer el archivo indicado.\n");
+            return fprintf(stderr,"%s","No se pudo leer el archivo indicado\n");
         }
     }
     
@@ -32,7 +32,7 @@ int main(int argc, char const *argv[]){
         lista = lista_crear();
         if (!lista){
         	fclose(archivo);
-            return fprintf(stderr,"%s","Error de memoria.\n");
+            return fprintf(stderr,"%s","ERROR\n");
         }
     }
     
