@@ -31,6 +31,17 @@ int division(int a,int b){
     return a/b;
 }
 
+int _logaritmo(int a,int b,int l,int c){
+    int n = b*l;
+    if (n == a) return c;
+    if (n > a) return c-1;
+    return _logaritmo(a,b,n,c+1);
+}
+
+int logaritmo(int a,int b){
+    return _logaritmo(a,b,1,1);
+}
+
 int _operador_ternario(int a,int b, int c){
     return a ? b : c;
 }
