@@ -5,6 +5,15 @@
 #include <stdio.h>
 #include <string.h>
 
+#define SUMA "+"
+#define RESTA "-"
+#define PRODUCTO "*"
+#define DIVISION "/"
+#define POTENCIA "^"
+#define LOGARITMO "log"
+#define RAIZ_CUAD "sqrt"
+#define OP_TERNARIO "?"
+
 bool es_numero(const char* str){
     int i = 0;
     while (str[i] != '\0'){
