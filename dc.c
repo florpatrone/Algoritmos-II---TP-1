@@ -4,6 +4,7 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include <string.h>
+#include <ctype.h>
 #include "strutil.h"
 #include "pila.h"
 
@@ -74,7 +75,7 @@ int* otras_operaciones(pila_t* pila, f_operacion operacion, bool logaritmo, bool
     }
 
     if (logaritmo){
-        if (ab[1] <= 0) return NULL;
+        if ( (ab[1] <= 1) || (ab[0] <= 0)) return NULL;
     }else if (potencia){
         if (ab[1] < 0) return NULL;
     }else if (division){
@@ -118,6 +119,7 @@ void calcular(char** entrada){
             int* n = malloc(sizeof(int));
             *n = atoi(simbolo);
             pila_apilar(pila,n);
+            i++;
             continue;
         }
         
@@ -127,7 +129,10 @@ void calcular(char** entrada){
             resultado = operador_ternario(pila);
         }else{
             f_operacion operacion = obtener_operacion(simbolo);
-            if (!operacion) break;
+            if (!operacion){
+                errores = true;
+                break;
+            }
             bool es_logaritmo = logaritmo == operacion;
             bool es_potencia = potencia == operacion;
             bool es_division = division == operacion;
@@ -138,6 +143,7 @@ void calcular(char** entrada){
         }else{
             pila_apilar(pila,resultado);
         }
+        i++;
     }
     if (pila_esta_vacia(pila)){
         errores = true;
@@ -150,19 +156,20 @@ void calcular(char** entrada){
     }
     pila_destruir(pila);
     if (errores){
-        fprintf(stdout,"%s","ERROR");
+        fprintf(stdout,"%s","ERROR\n");
     }else{
         fprintf(stdout,"%i",*(int*)resultado);
+        fprintf(stdout,"%c",'\n');
     }
 }
 
 int main(int argc, const char* argv[]){
     FILE* archivo = NULL;
 
-    if (argc == 0){
+    if (argc == 1){
         archivo = stdin;
-    }else if (argc == 1){
-        archivo = fopen(argv[0],"r");
+    }else if (argc == 2){
+        archivo = fopen(argv[1],"r");
         if (!archivo){
             return fprintf(stderr,"%s","No se pudo leer el archivo indicado\n");
         }
