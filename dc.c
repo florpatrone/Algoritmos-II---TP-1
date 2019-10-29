@@ -38,6 +38,20 @@ int potencia(int a, int b){
     return n*n*a;
 }
 
+int _raiz_cuadrada(int a, int inicio, int fin){
+    if ( (a == 0) || (a == 1) ) return a;
+    int medio = (inicio + fin) / 2;
+    if (medio*medio == a) return medio;
+    if (medio*medio < a){
+        if ( (medio+1)*(medio+1) > a){
+            return medio;
+        }
+        return _raiz_cuadrada(a,medio+1,fin);
+    }      
+    return _raiz_cuadrada(a,inicio,medio-1);
+  
+}
+
 int _logaritmo(int a,int b,int l,int c){
     int n = b*l;
     if (n == a) return c;
@@ -61,8 +75,8 @@ int* raiz_cuadrada(pila_t* pila){
     if (a < 0){
         return NULL;
     }
-    int* resultado = malloc(sizeof(int));    
-    *resultado = _raiz_cuadrada(a);
+    int* resultado = malloc(sizeof(int));   
+    *resultado = _raiz_cuadrada(a,0,a-1);
     return resultado;
 }
 
