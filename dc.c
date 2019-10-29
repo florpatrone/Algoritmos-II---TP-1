@@ -31,6 +31,13 @@ int division(int a,int b){
     return a/b;
 }
 
+int potencia(int a, int b){
+    if (b == 0) return 1;
+    int n = potencia(a,b/2);
+    if (b % 2 == 0) return n*n;
+    return n*n*a;
+}
+
 int _logaritmo(int a,int b,int l,int c){
     int n = b*l;
     if (n == a) return c;
