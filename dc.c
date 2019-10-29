@@ -71,12 +71,13 @@ int* raiz_cuadrada(pila_t* pila){
     if (pila_esta_vacia(pila)){
         return NULL;
     }
-    int a = *(int*)pila_desapilar(pila);
-    if (a < 0){
+    int* a = pila_desapilar(pila);
+    if (*a < 0){
+        free(a);
         return NULL;
     }
     int* resultado = malloc(sizeof(int));   
-    *resultado = _raiz_cuadrada(a,0,a-1);
+    *resultado = _raiz_cuadrada(*a,0,*a-1);
     return resultado;
 }
 
@@ -87,7 +88,9 @@ int* operador_ternario(pila_t* pila){
         if (pila_esta_vacia(pila)){
             return NULL;
         }
-        abc[j] = *(int*)pila_desapilar(pila);
+        int* n = pila_desapilar(pila);
+        abc[j] = *n;
+        free(n);
     }
 
     int* resultado = malloc(sizeof(int));
@@ -103,7 +106,9 @@ int* otras_operaciones(pila_t* pila, f_operacion operacion, bool logaritmo, bool
         if (pila_esta_vacia(pila)){
             return NULL;
         }
-        ab[j] = *(int*)pila_desapilar(pila); 
+        int* n = pila_desapilar(pila);
+        ab[j] = *n;
+        free(n); 
     }
 
     if (logaritmo){
@@ -193,6 +198,7 @@ void calcular(char** entrada){
         fprintf(stdout,"%i",*(int*)resultado);
         fprintf(stdout,"%c",'\n');
     }
+    free(resultado);
 }
 
 int main(int argc, const char* argv[]){
